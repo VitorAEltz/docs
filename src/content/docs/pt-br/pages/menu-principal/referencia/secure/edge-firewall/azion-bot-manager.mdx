@@ -5,14 +5,14 @@ description: >-
   maliciosos ou bots scriptados.
 meta_tags: 'bot, proteção, cybersegurança, edge computing'
 namespace: docs_bot_manager_reference
-permalink: /documentacao/produtos/secure/edge-firewall/bot-manager/
+permalink: /documentacao/produtos/secure/firewall/bot-manager/
 ---
 
 import LinkButton from 'azion-webkit/linkbutton';
 
 O **Bot Manager** da Azion usa algoritmos inteligentes avançados que permitem o aprendizado de máquina e *Reputation Intelligence* para analisar o comportamento dos dados recebidos. Isso permite a detecção de tráfego suspeito e bots maliciosos, facilitando a implementação de medidas preventivas contra atividades maliciosas, como preenchimento de credenciais (credential stuffing), varredura de vulnerabilidades (vulnerability scanning,) e raspagem de sites (site scraping).
 
-Este add-on do Edge Firewall atribui uma pontuação a cada requisição com base em regras, comportamentos e Reputation Intelligence. Se a pontuação exceder um limite predeterminado (threshold), o Bot Manager executa a ação predeterminada.
+Este add-on do Firewall atribui uma pontuação a cada requisição com base em regras, comportamentos e Reputation Intelligence. Se a pontuação exceder um limite predeterminado (threshold), o Bot Manager executa a ação predeterminada.
 
 Ao usar **Bot Manager**, você pode:
 
@@ -33,7 +33,7 @@ Ao usar **Bot Manager**, você pode:
 
 ## Implementação
 
-A Azion oferece o add-on Bot Manager, uma solução abrangente para o gerenciamento de bots. Entre em contato com a [equipe de vendas](https://www.azion.com/pt-br/contate-vendas/) para mais detalhes sobre a assinatura do Bot Manager.
+A Azion oferece o add-on Bot Manager, uma solução abrangente para o gerenciamento de bots. Entre em contato com a [equipe de vendas](https://www.azion.com/pt-br/contato/) para mais detalhes sobre a assinatura do Bot Manager.
 
 Além disso, uma [integração da versão lite](/pt-br/documentacao/produtos/guias/bot-manager-lite/) também está disponível no Marketplace.
 
@@ -44,7 +44,7 @@ Além disso, uma [integração da versão lite](/pt-br/documentacao/produtos/gui
 Em alto nível, o Bot Manager funciona da seguinte forma:
 
 1. Uma requisição chega a um domínio usando Bot Manager.
-2. O Edge Firewall recebe a requisição.
+2. O Firewall recebe a requisição.
 3. O Bot Manager inicia todos os processos de análise, incluindo:
     - Coleta dos dados da requisição, incluindo dispositivo, navegador e dados de rede, fingerprint, entre outros.
     - Identificação e classificação da requisição de acordo com algoritmos inteligentes avançados e Reputation Intelligence.
@@ -69,7 +69,7 @@ Bot Manager é capaz de executar **7 ações diferentes** sempre que a pontuaç�
 Todas essas ações podem ser configuradas para aplicações web e móveis, bem como APIs, oferecendo proteção em diferentes ambientes.
 
 :::tip
-Você também pode se beneficiar dos produtos **Secure**, incluindo [Web Application Firewall](/pt-br/documentacao/produtos/secure/edge-firewall/web-application-firewall/), [DDoS Protection](/pt-br/documentacao/produtos/secure/edge-firewall/ddos-protection/), [Network Layer Protection](/pt-br/documentacao/produtos/secure/edge-firewall/network-layer-protection/) e [Edge DNS](/pt-br/documentacao/produtos/secure/edge-dns/), para aumentar sua proteção, adicionando camadas extras de segurança à sua infraestrutura.
+Você também pode se beneficiar dos produtos **Secure**, incluindo [Web Application Firewall](/pt-br/documentacao/produtos/secure/firewall/web-application-firewall/), [DDoS Protection](/pt-br/documentacao/produtos/secure/firewall/ddos-protection/), [Network Shield](/pt-br/documentacao/produtos/secure/firewall/network-shield/) e [Edge DNS](/pt-br/documentacao/produtos/secure/edge-dns/), para aumentar sua proteção, adicionando camadas extras de segurança à sua infraestrutura.
 :::
 
 ### Casos de uso
@@ -102,7 +102,7 @@ As listas utilizadas pelo **Bot Manager** incluem critérios como:
 - Malware
 - Fraudes
 
-<LinkButton link="/pt-br/documentacao/produtos/secure/edge-firewall/network-layer-protection/network-lists/" label="saiba mais sobre network lists" severity="secondary" /> 
+<LinkButton link="/pt-br/documentacao/produtos/secure/firewall/network-shield/network-lists/" label="saiba mais sobre network lists" severity="secondary" /> 
 
 ### Classificação de bots
 
@@ -274,7 +274,7 @@ O report log do Bot Manager lista os seguintes campos:
 | bot_mode | String | Descreve o modo de proteção contra bots usado na requisição. |
 | bytes_sent | Number | O Content-Length da requisição. |
 | challenge_solved | Boolean | Um valor booleano que informa sempre que o usuário resolveu um desafio CAPTCHA.<br />Requer a integração de uma função CAPTCHA junto com a Bot Protection. |
-| classified | String | Define a classificação final que a edge function identifica para a requisição. Os valores possíveis são: <br />**legitimate** (quando a requisição não é identificada como um bot e há dados de fingerprint suficientes para garantir que não seja um ataque), **under evaluation** (quando a requisição não é identificada como um bot, mas não há dados de fingerprint suficientes para garantir que não seja um ataque), **bad bot** (quando a requisição atinge o limite de pontuação ou é identificada como um ataque), **good bot** (quando a requisição não é identificada como um ataque, o User-Agent corresponde a qualquer um dos padrões de User Agent bons. |
+| classified | String | Define a classificação final que a function identifica para a requisição. Os valores possíveis são: <br />**legitimate** (quando a requisição não é identificada como um bot e há dados de fingerprint suficientes para garantir que não seja um ataque), **under evaluation** (quando a requisição não é identificada como um bot, mas não há dados de fingerprint suficientes para garantir que não seja um ataque), **bad bot** (quando a requisição atinge o limite de pontuação ou é identificada como um ataque), **good bot** (quando a requisição não é identificada como um ataque, o User-Agent corresponde a qualquer um dos padrões de User Agent bons. |
 | disabled_matched_rules | Array of Numbers | Define os IDs de todas as regras estáticas desativadas que foram correspondidas durante a requisição.<br />Observe que quando uma regra desativada é correspondida, ela não incrementa a pontuação da requisição. |
 | engine_version | Number | Indica a versão do engine utilizada pela função. Esta propriedade está disponível apenas quando as regras dinâmicas estão ativadas. |
 | geoip_country | String | O código do país de onde a requisição foi feita. |
@@ -306,18 +306,48 @@ A tabela abaixo descreve todas as opções de configuração disponíveis que po
 | custom_html | String | Sim (apenas se a `action` for `custom_html`) |  | Define o HTML a ser usado na resposta que a função retornará aos usuários que violarem a proteção contra bots. **Se esta chave não for definida ou tiver um valor inválido, a ação acionada será `allow`.** |
 | custom_status_code | Número | Não | `200` | Usado apenas quando a ação `custom_html` é acionada. Define o código de status da resposta retornada aos usuários. |
 | disable_dynamic_rules | Booleano | Não | `False` | Desativa o uso do método de regras dinâmicas. |
-| disabled_static_rules | Array de números | Não | `[]` | Neste campo você pode definir regras a serem desativadas. Quando uma regra é desativada, ela ainda será executada (e sempre que a requisição corresponder a ela, o id será enviado para o `disabled_matched_rules` nos logs da edge function), mas não aumentará a pontuação da requisição. |
+| disabled_static_rules | Array de números | Não | `[]` | Neste campo você pode definir regras a serem desativadas. Quando uma regra é desativada, ela ainda será executada (e sempre que a requisição corresponder a ela, o id será enviado para o `disabled_matched_rules` nos logs da function), mas não aumentará a pontuação da requisição. |
 | dynamic_rules_baseline | Número | Não | `0` | É um ajuste fino relativo para a linha de base calculada. Isso implica em um multiplicador percentual para os valores. Uma linha de base mais baixa significa detecções mais rigorosas. Ex.: 0,1 = aumentar a linha de base em 10% ou -0,234 = diminuir a linha de base em 23,4%. |
 | dynamic_rules_logs_enabled | Booleano | Não | `False` | Quando ativado, a função escreverá logs de depuração de regras dinâmicas. **Isso é esperado para ser usado apenas para fins de depuração.** |
 | dynamic_rules_tolerance | String | Não | `soft` | Define o quão rigoroso será o algoritmo de regras dinâmicas. Os valores possíveis são: `soft` (menos rigoroso), `medium`, `hard` (mais rigoroso). Se um valor inválido for definido, a função usará a tolerância `soft`. |
 | engine_version | Number | Não | 1 | Indica o engine a ser utilizado.<br />**Versões disponíveis**:<br />`1`: **atual** (padrão, fallback);<br />`2`: baseado em sessão JA4H, que tende a gerar menos “colisões” entre dispositivos do que a versão 1.<br />Se um valor inválido for selecionado, o padrão (1) será utilizado como fallback.|
 | log_headers | Array de strings | Não | `-` | Este campo define quais cabeçalhos de requisição devem ser incluídos no log de relatório da função. O usuário pode definir quase qualquer cabeçalho de requisição que deseje escrever nos logs, exceto qualquer um da lista de cabeçalhos **proibidos** abaixo: `authorization`, `cookie`, `proxy-authorization`, `set-cookie`, `x-csrf-token`, `x-api-key`, `x-amz-security-token`. **Nota:** Os valores dos cabeçalhos serão impressos com codificação base64. |
-| log_tag | String | Não | Valor da variável: Cabeçalho `host` recebido da requisição | Este campo define uma tag a ser usada para identificar a Instância de Função que gerou a requisição no log de eventos das Edge Functions. |
+| log_tag | String | Não | Valor da variável: Cabeçalho `host` recebido da requisição | Este campo define uma tag a ser usada para identificar a Instância de Função que gerou a requisição no log de eventos das Functions. |
 | mode | String (valores possíveis são `api` e `web`) | Não | `web` | Define o modo de tráfego: Os valores possíveis são: `web`: para clientes HTTP compatíveis com cookies, como navegadores web; `api`: para tráfego como serviços web e serviços baseados em API que não usam cookies em suas requisições. |
 | redirect_to | String (URI) | Sim (apenas se a `action` for `redirect`) | `-` | Usado apenas quando a ação `redirect` é acionada. Define a URL/caminho relativo para onde o Bot Manager deve redirecionar os usuários. **Se esta chave não for definida ou tiver um valor inválido, a ação acionada será `allow`, pois a função não terá para onde redirecionar os usuários.** |
 | reputation_network_lists | Array de números | Não | `[IDs das Network Lists configuradas para a conta gerenciada pela Azion]` | Define cada Network List que deve ser usada para validar o IP da requisição. Se o IP da requisição for encontrado em uma lista, a pontuação da requisição será aumentada. Se o IP da requisição for encontrado em várias listas, a pontuação será aumentada várias vezes. |
 | session_signature_key | String | Não |  | Esta string é usada para assinar o valor do cookie `az_asm`. Quando este campo não tem valor ou tem um valor inválido, a função usará o valor padrão `azion`. |
 | threshold | Número | Não | `Infinity` | Define uma pontuação máxima que a requisição pode atingir antes que a função tome uma **action**. Quando definido como `0`, fará com que a `action` do Bot Manager seja sempre acionada (exceto se o usuário já tiver resolvido o Desafio ALTCHA, se o ALTCHA estiver em uso). Quando nenhum valor é definido, o threshold será definido como `Infinity`, portanto, todas as requisições sempre terão permissão para passar. |
+
+### JSON Args recomendados
+
+Esta é a estrutura JSON Args mais básica recomendada para ser usada com esta função:
+
+```json
+{
+  "threshold": 18,
+  "action": "deny",
+  "log_tag": "bot_manager",
+  "mode": "web",
+  "reputation_network_lists": [],
+  "disabled_static_rules": [],
+  "dynamic_rules_tolerance": "soft",
+  "log_headers": [
+    "accept",
+    "accept-encoding",
+    "accept-language",
+    "content-type",
+    "host",
+    "referer",
+    "user-agent",
+    "x-forwarded-for",
+    "x-request-id"
+  ]
+}
+```
+:::tip
+O threshold e a action podem variar conforme o uso ou as preferências do usuário.
+:::
 
 ## Versão do engine
 
@@ -340,9 +370,11 @@ Você pode usar SDKs para rastrear dispositivos móveis e identificar comportame
 
 ### Injeção de JavaScript
 
-Quando o arquivo JavaScript é inserido em sua edge application, ele coleta dados para identificar o acesso na requisição ao calcular sua fingerprint. Está disponível para uso com navegadores da web. Com a injeção de JavaScript, mais dados não sensíveis serão coletados do usuário, mas exclusivamente para identificação da fingerprint do dispositivo.
+Quando o arquivo JavaScript é inserido em sua application, ele coleta dados para identificar o acesso na requisição ao calcular sua fingerprint. Está disponível para uso com navegadores da web. Com a injeção de JavaScript, mais dados não sensíveis serão coletados do usuário, mas exclusivamente para identificação da fingerprint do dispositivo.
 
 Esses dados podem ser usados para criar regras e comportamentos mais robustos nos argumentos de Bot Manager, a fim de detectar e mitigar ameaças de forma mais eficaz.
+
+Para mais informações sobre como instalar o Javascript Tag (JS TAG) na Azion, [consulte nossa documentação](/pt-br/documentacao/produtos/guias/javascript-tag-js-tag/).
 
 ### Rate Limiting
 
@@ -350,7 +382,7 @@ O Rate Limiting (limitação de taxa) estabelece limites para o número de requi
 
 ### Fingerprint
 
-Um conjunto de informações (IP, cabeçalho `User-Agent`) cria um hash para dispositivos que acessam suas edge applications. As informações são coletadas rastreando a sessão do dispositivo e fornecem um detalhamento mais preciso do dispositivo usado na requisição, aumentando a precisão dos logs do Bot Manager.
+Um conjunto de informações (IP, cabeçalho `User-Agent`) cria um hash para dispositivos que acessam suas applications. As informações são coletadas rastreando a sessão do dispositivo e fornecem um detalhamento mais preciso do dispositivo usado na requisição, aumentando a precisão dos logs do Bot Manager.
 
 Se você utiliza Fingerprint com o Bot Manager, também pode habilitar o uso do [Real-Time Metrics](/pt-br/documentacao/produtos/observe/real-time-metrics/) da Azion para consultar dados consolidados via [GraphQL API](/pt-br/documentacao/devtools/graphql-api/) relacionados ao acesso à aplicação protegida pelo Bot Manager, facilitando a identificação de padrões e utilizando essa inteligência para otimizar as regras. Com essa funcionalidade, é possível definir um threshold e tomar uma ação específica quando o threshold é violado e o dispositivo ou usuário é identificado como malicioso, com base nos dados do fingerprint.
 
@@ -358,6 +390,29 @@ Se você utiliza Fingerprint com o Bot Manager, também pode habilitar o uso do 
 
 Ao usar a ação `redirect`, a URL/localização definida pode conter uma integração de Captcha para adicionar uma camada de segurança adicional. Isso ajuda a aumentar a segurança e a detecção de tráfego malicioso, apresentando um desafio para todas as requisições que violaram anteriormente qualquer limite para garantir que sejam legítimas.
 
+#### Configuração do desafio ALTCHA
+
+:::note
+- **É obrigatório executar o ALTCHA antes do Bot Manager no Rules Engine do Firewall, para que o desafio tenha o efeito correto na solução**, criando camadas de defesa complementares e evitando loops de redirecionamento para a melhor experiência do usuário legítimo.
+- Alternativamente, pode usar a Function ALTCHA de forma independente, apenas com o Firewall e proteger áreas específicas da sua aplicação por meio do desafio. 
+- Leia o guia [Como utilizar a Function ALTCHA através do Marketplace da Azion](https://www.azion.com/pt-br/documentacao/produtos/guias/altcha/) para saber mais.
+:::
+
+### Bot Manager
+
+1. Em Firewall, selecione **Rules Engine**.
+2. Clique no botão **+ Rules Engine** para criar uma Rule para executar a função ALTCHA.
+3. Na seção **Name**, insira um nome único e descritivo.
+4. Na seção **Criteria**, defina quando apresentar o desafio.
+ - No JSON Args do Bot Manager, defina a ação de redirecionamento para o endpoint de verificação do ALTCHA para que o tráfego classificado como suspeito seja enviado para a página de desafio do ALTCHA.
+ - Alinhe os mesmos critérios de triggers das duas funções e use ALTCHA e Bot Manager no Rules Engine. Isso assegura que as duas soluções atuem sobre o mesmo conjunto de requisições e que o ALTCHA esteja sempre pronto para receber o redirecionamento do Bot Manager.
+5. Defina a execução do ALTCHA sempre que uma **Request Uri** usar o endpoint `/form`, `/az-request-verify` e `/az-request-captcha`.
+6. Na seção **Behavior**, selecione **Run Function** > **ALTCHA**.
+7. Mantenha o botão **Status** como **Active**.
+​​8. Clique no botão **Save**.
+
+Esta configuração garante que todos os acessos ao endpoint `/api/submit` passam pela verificação ALTCHA antes da análise do Bot Manager, oferecendo múltiplas camadas de proteção.
+
 ### Regras personalizadas
 
-A Azion fornece configurações fáceis de usar, que devem ser suficientes para a maioria dos casos. Se você precisar de uma configuração mais detalhada, poderá editar o arquivo JSON da integração para personalizar e adicionar novas regras com base nas necessidades do seu negócio. Também é possível adicionar mais critérios e comportamentos a serem executados pelo [Rules Engine](/pt-br/documentacao/produtos/secure/edge-firewall/rules-engine/), construindo respostas mais abrangentes para possíveis ataques.
+A Azion fornece configurações fáceis de usar, que devem ser suficientes para a maioria dos casos. Se você precisar de uma configuração mais detalhada, poderá editar o arquivo JSON da integração para personalizar e adicionar novas regras com base nas necessidades do seu negócio. Também é possível adicionar mais critérios e comportamentos a serem executados pelo [Rules Engine](/pt-br/documentacao/produtos/secure/firewall/rules-engine/), construindo respostas mais abrangentes para possíveis ataques.
